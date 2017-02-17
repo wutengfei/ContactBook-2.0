@@ -21,6 +21,8 @@ public class DBAdapter {
     private static final String KEY_NAME = "name";
     private static final String KEY_PHONE = "phone";
 
+
+
     private SQLiteDatabase db;
     private final Context context;
 
