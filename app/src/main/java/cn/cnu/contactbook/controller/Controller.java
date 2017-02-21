@@ -44,8 +44,5 @@ public class Controller {
         dbAdapter.update(id, contact);
         dbAdapter.close();
     }
-    //初始化联系人
-    public Contact[] readContacts(){
-        return dbAdapter.readContacts();
-    }
+
 }

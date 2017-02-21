@@ -5,12 +5,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
@@ -23,31 +26,14 @@ import java.util.*;
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private ListView lv;
     private SearchView sv;
-
+    private static final int item1 = Menu.FIRST;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initContacts();
+
     }
 
-    private void initContacts() {
-        Controller controller = new Controller(MainActivity.this);
-        Contact[] contact = controller.getAllContact();
-        if (contact == null) {//
-             //动态获取读取联系人权限
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{android.Manifest.permission.READ_CONTACTS},
-                        1);
-            }
-
-            Contact[] contacts = controller.readContacts();
-            for (int i = 0; i < contacts.length; i++)
-                controller.add(contacts[i]);
-        }
-    }
 
     /**
      * 将适配器显示在onStart方法中是为了让每次显示此界面时都刷新列表
@@ -79,10 +65,28 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 item.put("id", contacts[i].getId());
                 item.put("name", contacts[i].getName());
                 item.put("phone", contacts[i].getPhone());
+                item.put("phone2", contacts[i].getPhone2());
+                item.put("email", contacts[i].getEmail());
+                item.put("photo", contacts[i].getPhoto());
+
                 data.add(item);
             }
         //创建SimpleAdapter适配器将数据绑定到item显示控件上
-        SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.listview, new String[]{"name"}, new int[]{R.id.name});
+        SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.listview,
+                new String[]{"photo", "name"}, new int[]{R.id.imageView, R.id.name});
+
+        adapter.setViewBinder(new SimpleAdapter.ViewBinder() {
+
+            @Override
+            public boolean setViewValue(View view, Object data, String textRepresentation) {
+                if (view instanceof ImageView && data instanceof Bitmap) {
+                    ImageView iv = (ImageView) view;
+                    iv.setImageBitmap((Bitmap) data);
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         if (lv != null) {
@@ -90,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             //listView点击事件
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                @Override //设置点击事件要判断这个position是对应原来的list，还是搜索后的list，parent.getAdapter().getItem(position)。
+                @Override
+                //设置点击事件要判断这个position是对应原来的list，还是搜索后的list，parent.getAdapter().getItem(position)。
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     System.out.println("--------点击的是-----" + parent.getAdapter().getItem(position).toString());
@@ -172,4 +177,24 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         }
     };
+
+    //菜单
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, item1, 0, "设置");
+
+        return true;
+    }
+    //菜单列表
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case item1:
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, SettingActivity.class);
+                MainActivity.this.startActivity(intent);
+                break;
+        }
+        return true;
+    }
 }

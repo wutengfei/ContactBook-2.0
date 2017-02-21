@@ -6,6 +6,9 @@ package cn.cnu.contactbook.model;
 public class Contact {
     private String name;
     private String phone;
+    private String phone2;
+    private String email;
+    private String photo;
     private int id;
 
     public Contact() {
@@ -16,10 +19,28 @@ public class Contact {
         this.phone = phone;
     }
 
-    public Contact(String name, String phone, int id) {
+    public Contact(int id, String name, String phone, String phone2, String email, String photo) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
-        this.id = id;
+        this.phone2 = phone2;
+        this.email = email;
+        this.photo = photo;
+    }
+
+    public Contact(String name, String phone, String phone2, String email, String photo) {
+        this.name = name;
+        this.phone = phone;
+        this.phone2 = phone2;
+        this.email = email;
+        this.photo = photo;
+    }
+
+    public Contact(String name, String phone, String phone2, String email) {
+        this.name = name;
+        this.phone = phone;
+        this.phone2 = phone2;
+        this.email = email;
     }
 
     public String getName() {
@@ -44,5 +65,29 @@ public class Contact {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPhone2() {
+        return phone2;
+    }
+
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
