@@ -12,47 +12,17 @@
 
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/call"
-        android:layout_marginTop="29dp"
-        android:text="手机："
-        android:textColor="#ff669900"
-
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/call"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/relativeLayout0"
-        android:background="@drawable/phone"
-        android:onClick="call" />
-
-    <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/call"
-        android:layout_marginTop="29dp"
+        android:layout_below="@+id/relativeLayout0"
+
         android:text="手机："
-        android:textColor="#ff669900"
+        android:textColor="@color/colorPrimaryDark"
+
 
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_above="@+id/textView3"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/message"
-        android:onClick="sendMessage" />
 
     <TextView
         android:id="@+id/phone"
@@ -62,7 +32,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
         android:text="123"
-        android:textColor="#ff669900"
+        android:textColor="@color/colorPrimaryDark"
+
         android:textSize="20sp" />
 
     <TextView
@@ -70,9 +41,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/phone"
-
         android:text="其他手机："
-        android:textColor="#ff669900"
+
+        android:textColor="@color/colorPrimaryDark"
+
 
         android:textSize="20sp" />
 
@@ -84,7 +56,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView5"
         android:text="456"
-        android:textColor="#ff669900"
+        android:textColor="@color/colorPrimaryDark"
+
         android:textSize="20sp" />
 
 
@@ -106,7 +79,8 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:text="TextView"
-            android:textColor="#ff669900"
+            android:textColor="@color/colorPrimaryDark"
+
             android:textSize="20sp" />
 
         <Button
@@ -154,58 +128,103 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/delete"
-        android:onClick="delete"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/email"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="000@qq.com"
-        android:textColor="#ff669900"
-        android:textSize="20sp"
-        android:layout_above="@+id/delete"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView3">
+
+        <Button
+            android:id="@+id/call"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/relativeLayout0"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/phone"
+            android:onClick="call" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/call2"
+            android:background="@drawable/message"
+            android:onClick="sendMessage" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView5">
+
+        <Button
+            android:id="@+id/call2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/phone2"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/phone"
+            android:onClick="call2" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_above="@+id/textView3"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/message"
+            android:onClick="sendMessage2" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="电子邮件："
-        android:textColor="#ff669900"
-
-        android:textSize="20sp"
-        android:layout_above="@+id/email"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
 
-    <Button
-        android:id="@+id/call2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
 
-        android:background="@drawable/phone"
-        android:onClick="call2"
         android:layout_below="@+id/phone2"
+        android:layout_marginTop="32dp"
+        android:text="电子邮件："
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+
+        android:layout_below="@+id/textView6"
+        android:text="000@qq.com"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/delete"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/message"
-        android:onClick="sendMessage2"
-        android:layout_alignTop="@+id/call2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/delete"
+        android:onClick="delete" />
+
+
 </RelativeLayout>

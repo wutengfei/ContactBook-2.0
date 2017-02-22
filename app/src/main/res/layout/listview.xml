@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="姓名"
         android:textSize="30sp"
-
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginLeft="5dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageView"
