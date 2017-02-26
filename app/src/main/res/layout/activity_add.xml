@@ -13,14 +13,14 @@
         android:id="@+id/et_phone2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/phone2"
 
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/et_phone"
         android:layout_toEndOf="@+id/phone2"
         android:layout_toRightOf="@+id/phone2"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignBottom="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
@@ -89,54 +89,101 @@
 
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/et_phone2"
         android:layout_toEndOf="@+id/textView2"
         android:layout_toRightOf="@+id/textView2"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignTop="@+id/phone2" />
+
+    <TextView
+        android:text="性别："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        android:id="@+id/textView4" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/et_sex"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/et_phone2"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4" />
+
+    <TextView
+        android:text="单位："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView11" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/et_sex"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/et_company"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignBottom="@+id/textView11"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/phone2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
 
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2"
         android:text="电子邮件："
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/phone2"
-        android:layout_toEndOf="@+id/textView9"
-        android:layout_toRightOf="@+id/textView9"
-        android:background="@drawable/photo"
-        android:onClick="selectPhoto" />
-
-    <Button
-        android:id="@+id/sure"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="14dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="sure"
-        android:text="确定" />
+        android:textSize="30sp"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/phone2"
         android:text="头像："
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_below="@+id/phone2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/photo"
+        android:onClick="selectPhoto"
+        android:layout_below="@+id/phone2"
+        android:layout_toRightOf="@+id/textView9"
+        android:layout_toEndOf="@+id/textView9" />
+
+    <Button
+        android:id="@+id/sure"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="sure"
+        android:text="确定"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="33dp" />
 </RelativeLayout>

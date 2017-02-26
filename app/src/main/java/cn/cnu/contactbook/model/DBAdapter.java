@@ -36,6 +36,8 @@ public class DBAdapter {
     private static final String KEY_PHONE2 = "phone2";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_PHOTO = "photo";
+    private static final String KEY_SEX = "sex";
+    private static final String KEY_COMPANY = "company";
 
 
     private SQLiteDatabase db;
@@ -49,7 +51,8 @@ public class DBAdapter {
         private static final String DB_CREATE = "create table " +
                 DB_TABLE + "(" + KEY_ID + " integer primary key autoincrement," +
                 KEY_NAME + " varchar(20)," + KEY_PHONE + " varchar(20)," +
-                KEY_PHONE2 + " varchar(20)," + KEY_EMAIL + " varchar(50),"+KEY_PHOTO+" varchar(100))";
+                KEY_PHONE2 + " varchar(20)," + KEY_EMAIL + " varchar(50),"+
+                KEY_PHOTO+" varchar(100),"+KEY_SEX+" varchar(10),"+KEY_COMPANY+" varchar(100))";
 
         @Override
         public void onCreate(SQLiteDatabase _db) {
@@ -91,6 +94,8 @@ public class DBAdapter {
             newValues.put(KEY_PHONE2, contact.getPhone2());
             newValues.put(KEY_EMAIL, contact.getEmail());
             newValues.put(KEY_PHOTO, contact.getPhoto());
+            newValues.put(KEY_SEX, contact.getSex());
+            newValues.put(KEY_COMPANY, contact.getCompany());
             return db.insert(DB_TABLE, null, newValues);
     }
 
@@ -105,17 +110,21 @@ public class DBAdapter {
         updateValues.put(KEY_PHONE2, contact.getPhone2());
         updateValues.put(KEY_EMAIL, contact.getEmail());
         updateValues.put(KEY_PHOTO, contact.getPhoto());
+        updateValues.put(KEY_SEX, contact.getSex());
+        updateValues.put(KEY_COMPANY, contact.getCompany());
         return db.update(DB_TABLE, updateValues, KEY_ID + " like ? ", new String[]{id + ""});
     }
 
     public Contact[] getContact(int id) {
-        Cursor cursor = db.query(DB_TABLE, new String[]{KEY_ID, KEY_NAME, KEY_PHONE,KEY_PHONE2,KEY_EMAIL,KEY_PHOTO},
+        Cursor cursor = db.query(DB_TABLE, new String[]{KEY_ID, KEY_NAME, KEY_PHONE,KEY_PHONE2,KEY_EMAIL,
+                KEY_PHOTO,KEY_SEX,KEY_COMPANY},
                 KEY_ID + " like ? ", new String[]{id + ""}, null, null, null, null);
         return ConvertToContact(cursor);
     }
 
     public Contact[] getAll() {
-        Cursor cursor = db.query(DB_TABLE, new String[]{KEY_ID, KEY_NAME, KEY_PHONE,KEY_PHONE2,KEY_EMAIL,KEY_PHOTO},
+        Cursor cursor = db.query(DB_TABLE, new String[]{KEY_ID, KEY_NAME, KEY_PHONE,KEY_PHONE2,KEY_EMAIL,
+                KEY_PHOTO,KEY_SEX,KEY_COMPANY},
                 null, null, null, null, KEY_NAME + " asc");
         return ConvertToContact(cursor);
     }
@@ -132,6 +141,8 @@ public class DBAdapter {
             peoples[i].setPhone2(cursor.getString(cursor.getColumnIndex(KEY_PHONE2)));
             peoples[i].setEmail(cursor.getString(cursor.getColumnIndex(KEY_EMAIL)));
             peoples[i].setPhoto(cursor.getString(cursor.getColumnIndex(KEY_PHOTO)));
+            peoples[i].setSex(cursor.getString(cursor.getColumnIndex(KEY_SEX)));
+            peoples[i].setCompany(cursor.getString(cursor.getColumnIndex(KEY_COMPANY)));
             cursor.moveToNext();
         }
         return peoples;

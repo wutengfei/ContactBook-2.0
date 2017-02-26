@@ -41,11 +41,15 @@ public class LookActivity extends AppCompatActivity {
     private TextView tv_phone;
     private TextView tv_phone2;
     private TextView tv_email;
+    private TextView tv_sex;
+    private TextView tv_company;
     private String name = "";
     private String phone = "";
     private String phone2 = "";
     private String email = "";
     private String photo = "";
+    private String sex = "";
+    private String company = "";
     private static int id;
     private Controller controller;
     private ImageView imageView;
@@ -60,6 +64,8 @@ public class LookActivity extends AppCompatActivity {
         tv_phone = (TextView) findViewById(R.id.phone);
         tv_phone2 = (TextView) findViewById(R.id.phone2);
         tv_email = (TextView) findViewById(R.id.email);
+        tv_sex = (TextView) findViewById(R.id.sex);
+        tv_company = (TextView) findViewById(R.id.company);
         imageView = (ImageView) findViewById(R.id.imageView);
     }
 
@@ -74,10 +80,14 @@ public class LookActivity extends AppCompatActivity {
         phone2 = contact[0].getPhone2();
         email = contact[0].getEmail();
         photo = contact[0].getPhoto();
+        sex = contact[0].getSex();
+        company = contact[0].getCompany();
         tv_phone.setText(phone);
         tv_name.setText(name);
         tv_phone2.setText(phone2);
         tv_email.setText(email);
+        tv_sex.setText(sex);
+        tv_company.setText(company);
         Bitmap bitmap = getLoacalBitmap(photo); //根据路径从本地取图片
         imageView.setImageBitmap(bitmap);    //设置Bitmap
     }
@@ -115,6 +125,8 @@ public class LookActivity extends AppCompatActivity {
         intent.putExtra("phone2", phone2);
         intent.putExtra("email", email);
         intent.putExtra("photo", photo);
+        intent.putExtra("sex", sex);
+        intent.putExtra("company", company);
         startActivity(intent);
     }
 

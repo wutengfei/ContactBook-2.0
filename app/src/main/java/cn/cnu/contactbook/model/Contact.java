@@ -9,6 +9,8 @@ public class Contact {
     private String phone2;
     private String email;
     private String photo;
+    private String company;
+    private String sex;
     private int id;
 
     public Contact() {
@@ -26,6 +28,17 @@ public class Contact {
         this.phone2 = phone2;
         this.email = email;
         this.photo = photo;
+    }
+
+    public Contact(String name, String phone, String phone2, String email, String photo,  String sex,String company) {
+        this.name = name;
+        this.phone = phone;
+        this.phone2 = phone2;
+        this.email = email;
+        this.photo = photo;
+        this.sex = sex;
+        this.company = company;
+
     }
 
     public Contact(String name, String phone, String phone2, String email, String photo) {
@@ -89,5 +102,21 @@ public class Contact {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 item.put("phone2", contacts[i].getPhone2());
                 item.put("email", contacts[i].getEmail());
                 item.put("photo", contacts[i].getPhoto());
+                item.put("sex", contacts[i].getSex());
+                item.put("company", contacts[i].getCompany());
 
                 data.add(item);
             }

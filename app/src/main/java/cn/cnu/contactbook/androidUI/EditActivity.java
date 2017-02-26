@@ -24,36 +24,51 @@ public class EditActivity extends AppCompatActivity {
     private String phone2;
     private String email;
     private String photo;
+    private String sex;
+    private String company;
     private int id;
     private EditText et_name;
     private EditText et_phone;
     private EditText et_phone2;
     private EditText et_email;
+    private EditText et_sex;
+    private EditText et_company;
     private ImageView imageView;
-    String imgPath = "";
+    private String imgPath = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        Intent intent = getIntent();//接收上个活动传来的数据
+
+        et_name = (EditText) findViewById(R.id.name);
+        et_phone = (EditText) findViewById(R.id.phone);
+        et_phone2 = (EditText) findViewById(R.id.phone2);
+        et_email = (EditText) findViewById(R.id.email);
+        et_sex = (EditText) findViewById(R.id.sex);
+        et_company = (EditText) findViewById(R.id.company);
+        imageView = (ImageView) findViewById(R.id.imageView);
+
+        Intent intent = getIntent();//接收上个活动(LookActivity)传来的数据
         name = intent.getStringExtra("name");
         phone = intent.getStringExtra("phone");
         phone2 = intent.getStringExtra("phone2");
         email = intent.getStringExtra("email");
         photo = intent.getStringExtra("photo");
+        sex = intent.getStringExtra("sex");
+        company = intent.getStringExtra("company");
         id = intent.getIntExtra("id", 0);
-        et_name = (EditText) findViewById(R.id.name);
-        et_phone = (EditText) findViewById(R.id.phone);
-        et_phone2 = (EditText) findViewById(R.id.phone2);
-        et_email = (EditText) findViewById(R.id.email);
-        imageView = (ImageView) findViewById(R.id.imageView);
         et_name.setText(name);
         et_phone.setText(phone);
         et_phone2.setText(phone2);
         et_email.setText(email);
+        et_sex.setText(sex);
+        et_company.setText(company);
         Bitmap bitmap = getLoacalBitmap(photo); //根据路径从本地取图片
         imageView.setImageBitmap(bitmap);    //设置Bitmap
     }
+
+
     /**
      * 加载本地图片
      *
@@ -65,22 +80,24 @@ public class EditActivity extends AppCompatActivity {
             if (!url.equals("")) {
                 FileInputStream fis = new FileInputStream(url);
                 return BitmapFactory.decodeStream(fis);
-            }
-            else return null;
+            } else return null;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
+
     //点击确定时更新数据
     public void sure(View v) {
         String phone_new = et_phone.getText().toString().trim();
         String name_new = et_name.getText().toString().trim();
         String phone2_new = et_phone2.getText().toString().trim();
         String email_new = et_email.getText().toString().trim();
-        String photo_new=imgPath;
-
-        Contact contact = new Contact(name_new, phone_new,phone2_new,email_new,photo_new);
+        String sex_new = et_sex.getText().toString().trim();
+        String company_new = et_company.getText().toString().trim();
+        photo=imgPath;
+        String photo_new = imgPath;
+        Contact contact = new Contact(name_new, phone_new, phone2_new, email_new, photo_new, sex_new, company_new);
         Controller controller = new Controller(this);
         controller.update(id, contact);
         finish();

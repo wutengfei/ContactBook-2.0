@@ -23,12 +23,16 @@ public class AddActivity extends AppCompatActivity {
     private EditText et_phone;
     private EditText et_phone2;
     private EditText et_email;
+    private EditText et_sex;
+    private EditText et_company;
     private ImageView imageView;
     private String name = "";
     private String phone = "";
     private String phone2 = "";
     private String email = "";
     private String photo = "";
+    private String sex = "";
+    private String company = "";
     private String imgPath = "";
 
     @Override
@@ -39,6 +43,8 @@ public class AddActivity extends AppCompatActivity {
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_phone2 = (EditText) findViewById(R.id.et_phone2);
         et_email = (EditText) findViewById(R.id.et_email);
+        et_sex = (EditText) findViewById(R.id.et_sex);
+        et_company = (EditText) findViewById(R.id.et_company);
         imageView=(ImageView)findViewById(R.id.imageView);
     }
 
@@ -47,12 +53,14 @@ public class AddActivity extends AppCompatActivity {
          phone = et_phone.getText().toString().trim();
         phone2 = et_phone2.getText().toString().trim();
         email = et_email.getText().toString().trim();
+        sex = et_sex.getText().toString().trim();
+        company = et_company.getText().toString().trim();
         photo=imgPath;
 
         if (name.equals("") || phone.equals(""))
             Toast.makeText(AddActivity.this, "请填写姓名和手机号", Toast.LENGTH_SHORT).show();
         else {
-            Contact contact = new Contact(name, phone, phone2, email, photo);
+            Contact contact = new Contact(name, phone, phone2, email, photo,sex,company);
             Controller controller = new Controller(AddActivity.this);
             controller.add(contact);
             Intent intent = new Intent(this, MainActivity.class);

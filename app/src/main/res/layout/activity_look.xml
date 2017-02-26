@@ -42,10 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/phone"
         android:text="其他手机："
-
         android:textColor="@color/colorPrimaryDark"
-
-
         android:textSize="20sp" />
 
     <TextView
@@ -57,7 +54,6 @@
         android:layout_below="@+id/textView5"
         android:text="456"
         android:textColor="@color/colorPrimaryDark"
-
         android:textSize="20sp" />
 
 
@@ -78,7 +74,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:text="TextView"
+            android:text="姓名"
             android:textColor="@color/colorPrimaryDark"
 
             android:textSize="20sp" />
@@ -90,7 +86,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/edit"
+            android:background="@drawable/edit1"
             android:onClick="edit" />
 
         <RelativeLayout
@@ -109,7 +105,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:background="@drawable/back"
+                android:background="@drawable/back1"
                 android:onClick="back"
                 android:text="" />
 
@@ -122,7 +118,7 @@
             android:layout_height="80dp"
             android:layout_below="@+id/relativeLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/photo2" />
 
 
@@ -163,6 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:id="@+id/linearLayout"
         android:layout_below="@+id/textView5">
 
         <Button
@@ -189,42 +186,90 @@
     </LinearLayout>
 
     <TextView
+        android:text="性别："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:id="@+id/textView18"
+        android:layout_alignRight="@+id/textView5"
+        android:layout_alignEnd="@+id/textView5" />
+
+    <TextView
+        android:text="男"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView18"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/sex"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="单位："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sex"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:id="@+id/textView20"
+        android:layout_alignRight="@+id/textView18"
+        android:layout_alignEnd="@+id/textView18" />
+
+    <TextView
+        android:text="百度公司"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView20"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/company"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-
-
-        android:layout_below="@+id/phone2"
-        android:layout_marginTop="32dp"
         android:text="电子邮件："
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@+id/company"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-
-        android:layout_below="@+id/textView6"
-        android:text="000@qq.com"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp" />
+       />
 
     <Button
         android:id="@+id/delete"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="36dp"
         android:background="@drawable/delete"
-        android:onClick="delete" />
+        android:onClick="delete"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="000@qq.com"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
