@@ -55,6 +55,7 @@ public class EditActivity extends AppCompatActivity {
         phone2 = intent.getStringExtra("phone2");
         email = intent.getStringExtra("email");
         photo = intent.getStringExtra("photo");
+        imgPath=photo;//把初始路径先赋给imgPath
         sex = intent.getStringExtra("sex");
         company = intent.getStringExtra("company");
         id = intent.getIntExtra("id", 0);
@@ -95,8 +96,8 @@ public class EditActivity extends AppCompatActivity {
         String email_new = et_email.getText().toString().trim();
         String sex_new = et_sex.getText().toString().trim();
         String company_new = et_company.getText().toString().trim();
-        photo=imgPath;
-        String photo_new = imgPath;
+        photo=imgPath;//如果onActivityResult被调用就会改变imgPath的值，把新的路径赋给photo，没调用就用原来的照片路径
+        String photo_new = photo;
         Contact contact = new Contact(name_new, phone_new, phone2_new, email_new, photo_new, sex_new, company_new);
         Controller controller = new Controller(this);
         controller.update(id, contact);
