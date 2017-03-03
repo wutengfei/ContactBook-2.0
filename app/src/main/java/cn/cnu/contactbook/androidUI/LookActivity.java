@@ -212,10 +212,15 @@ public class LookActivity extends AppCompatActivity {
         Thread thread;
         SharedPreferences sp = getSharedPreferences("recallTime", MODE_PRIVATE);
         int sleepTime=sp.getInt("recallTime",10);
+        /**
+         * CALL_STATE_IDLE 无任何状态时
+         * CALL_STATE_OFFHOOK 接起电话时(正在拨通中或接通)
+         * CALL_STATE_RINGING 电话进来时（通话时有来电打入）
+         */
         @Override
         public void onCallStateChanged(int state, String phoneNumber) {
             switch (state) {
-                case TelephonyManager.CALL_STATE_IDLE://挂断电话
+                case TelephonyManager.CALL_STATE_IDLE://无任何状态时
 
                     final Handler handler = new Handler() {
                         public void handleMessage(Message msg) {
@@ -249,9 +254,9 @@ public class LookActivity extends AppCompatActivity {
                     });
                     thread.start();
                     break;
-                case TelephonyManager.CALL_STATE_OFFHOOK://接通电话
+                case TelephonyManager.CALL_STATE_OFFHOOK://接起电话时
                     break;
-                case TelephonyManager.CALL_STATE_RINGING://正在拨
+                case TelephonyManager.CALL_STATE_RINGING://电话进来时
                     break;
                 default:
                     break;
