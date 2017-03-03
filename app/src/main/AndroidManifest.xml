@@ -45,12 +45,6 @@
 
         </activity>
 
-        <receiver android:name=".receiver.PhoneStateReceive">
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.PHONE_STATE" />
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>
