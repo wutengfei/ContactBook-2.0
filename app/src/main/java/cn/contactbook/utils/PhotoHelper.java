@@ -1,4 +1,4 @@
-package cn.cnu.contactbook.utils;
+package cn.contactbook.utils;
 
 import android.app.Activity;
 
@@ -50,7 +50,7 @@ public class PhotoHelper {
 
     private static String pathForNewCameraPhoto(String dir, String fileName) {
         if (dir == null) {
-            dir = APPPATH + "Android/data/cn.cnu.contactbook";
+            dir = APPPATH + "Android/data/cn.contactbook";
         }
 
         File file = new File(dir);

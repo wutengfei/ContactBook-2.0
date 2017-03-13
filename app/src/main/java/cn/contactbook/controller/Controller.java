@@ -1,8 +1,8 @@
-package cn.cnu.contactbook.controller;
+package cn.contactbook.controller;
 
 import android.content.Context;
-import cn.cnu.contactbook.model.Contact;
-import cn.cnu.contactbook.model.DBAdapter;
+import cn.contactbook.model.Contact;
+import cn.contactbook.model.DBAdapter;
 
 /**
  * Created by dell on 2016/10/10.

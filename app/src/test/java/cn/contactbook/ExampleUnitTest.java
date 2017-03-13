@@ -1,4 +1,4 @@
-package cn.cnu.contactbook;
+package cn.contactbook;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package cn.cnu.contactbook.androidUI;
+package cn.contactbook.androidUI;
 
 import android.Manifest;
 
@@ -31,9 +31,9 @@ import android.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import cn.cnu.contactbook.R;
-import cn.cnu.contactbook.controller.Controller;
-import cn.cnu.contactbook.model.Contact;
+import cn.contactbook.R;
+import cn.contactbook.controller.Controller;
+import cn.contactbook.model.Contact;
 
 
 public class LookActivity extends AppCompatActivity {

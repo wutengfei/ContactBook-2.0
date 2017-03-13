@@ -1,4 +1,4 @@
-package cn.cnu.contactbook.androidUI;
+package cn.contactbook.androidUI;
 
 
 import android.content.SharedPreferences;
@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import cn.cnu.contactbook.R;
+import cn.contactbook.R;
 
 public class SettingActivity extends AppCompatActivity {
     private EditText editText;

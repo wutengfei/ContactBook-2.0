@@ -1,4 +1,4 @@
-package cn.cnu.contactbook.model;
+package cn.contactbook.model;
 
 /**
  * Created by dell on 2016/10/10.

@@ -10,6 +10,16 @@
     tools:context=".androidUI.AddActivity">
 
     <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/name"
+            android:layout_toRightOf="@+id/name"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_alignBottom="@+id/name"/>
+    <EditText
         android:id="@+id/et_phone2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,16 +56,6 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/et_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/name"
-
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/name"
-        android:layout_toRightOf="@+id/name"
-        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/phone"

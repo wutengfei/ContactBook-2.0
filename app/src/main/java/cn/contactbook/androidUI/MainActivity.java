@@ -1,13 +1,9 @@
-package cn.cnu.contactbook.androidUI;
+package cn.contactbook.androidUI;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,9 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
-import cn.cnu.contactbook.R;
-import cn.cnu.contactbook.controller.Controller;
-import cn.cnu.contactbook.model.Contact;
+import cn.contactbook.R;
+import cn.contactbook.controller.Controller;
+import cn.contactbook.model.Contact;
 
 import java.util.*;
 

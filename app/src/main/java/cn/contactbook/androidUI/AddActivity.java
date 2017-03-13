@@ -1,4 +1,4 @@
-package cn.cnu.contactbook.androidUI;
+package cn.contactbook.androidUI;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,10 +13,10 @@ import android.widget.Toast;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import cn.cnu.contactbook.R;
-import cn.cnu.contactbook.controller.Controller;
-import cn.cnu.contactbook.model.Contact;
-import cn.cnu.contactbook.utils.PhotoHelper;
+import cn.contactbook.R;
+import cn.contactbook.controller.Controller;
+import cn.contactbook.model.Contact;
+import cn.contactbook.utils.PhotoHelper;
 
 public class AddActivity extends AppCompatActivity {
     private EditText et_name;
