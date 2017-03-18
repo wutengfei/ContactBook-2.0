@@ -54,7 +54,7 @@ public class LookActivity extends AppCompatActivity {
     private Controller controller;
     private ImageView imageView;
     private String imgPath = "";
-    private int sleepTime=0;
+    private int sleepTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +131,6 @@ public class LookActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * 加载本地图片
      *
@@ -143,8 +142,7 @@ public class LookActivity extends AppCompatActivity {
             if (!url.equals("")) {
                 FileInputStream fis = new FileInputStream(url);
                 return BitmapFactory.decodeStream(fis);
-            }
-           else return null;
+            } else return null;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
@@ -172,6 +170,7 @@ public class LookActivity extends AppCompatActivity {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         telephonyManager.listen(myPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
     }
+
     //拨打电话
     public void call2(View v) {
         //动态获取打电话权限
@@ -182,15 +181,18 @@ public class LookActivity extends AppCompatActivity {
             }
             return;
         }
-
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.CALL");//调用系统拨打电话
-        intent.setData(Uri.parse("tel:" + phone2));
-        startActivity(intent);
-        //监听电话接通状态
-        MyPhoneStateListener myPhoneStateListener = new MyPhoneStateListener();
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        telephonyManager.listen(myPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        if (phone2.equals("")) {
+            Toast.makeText(this, "没有号码", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.CALL");//调用系统拨打电话
+            intent.setData(Uri.parse("tel:" + phone2));
+            startActivity(intent);
+            //监听电话接通状态
+            MyPhoneStateListener myPhoneStateListener = new MyPhoneStateListener();
+            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager.listen(myPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        }
     }
 
     public void sendMessage(View v) {
@@ -200,18 +202,25 @@ public class LookActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-    public void sendMessage2(View v) {
-        Uri smsToUri = Uri.parse("smsto:" + phone2);
-        Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri);//调用系统发短信
-        //intent.putExtra("发送内容是", " ");
-        startActivity(intent);
 
+    public void sendMessage2(View v) {
+        if (phone2.equals("")) {
+            System.out.println("phone2:========"+phone2);
+            Toast.makeText(this, "没有号码", Toast.LENGTH_SHORT).show();
+        } else {
+            Uri smsToUri = Uri.parse("smsto:" + phone2);
+            Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri);//调用系统发短信
+            //intent.putExtra("发送内容是", " ");
+            startActivity(intent);
+        }
     }
+
     private class MyPhoneStateListener extends PhoneStateListener {
         private int callCount = 0;
         Thread thread;
         SharedPreferences sp = getSharedPreferences("recallTime", MODE_PRIVATE);
-        int sleepTime=sp.getInt("recallTime",10);
+        int sleepTime = sp.getInt("recallTime", 10);
+
         /**
          * CALL_STATE_IDLE 无任何状态时
          * CALL_STATE_OFFHOOK 接起电话时(正在拨通中或接通)
@@ -241,7 +250,7 @@ public class LookActivity extends AppCompatActivity {
                         public void run() {
                             while (true) {
                                 try {
-                                    Thread.sleep(sleepTime*1000);// 线程暂停多少毫秒
+                                    Thread.sleep(sleepTime * 1000);// 线程暂停多少毫秒
                                     Message message = new Message();
                                     message.what = 1;
                                     handler.sendMessage(message);// 发送消息
