@@ -2,6 +2,7 @@ package cn.contactbook.androidUI;
 
 import android.Manifest;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,14 +12,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
+import android.os.*;
 
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 
 import android.telephony.TelephonyManager;
@@ -34,6 +32,7 @@ import java.io.FileNotFoundException;
 import cn.contactbook.R;
 import cn.contactbook.controller.Controller;
 import cn.contactbook.model.Contact;
+import cn.contactbook.service.MyService;
 
 
 public class LookActivity extends AppCompatActivity {
@@ -165,10 +164,11 @@ public class LookActivity extends AppCompatActivity {
         intent.setAction("android.intent.action.CALL");//调用系统拨打电话
         intent.setData(Uri.parse("tel:" + phone));
         startActivity(intent);
-        //监听电话接通状态
-        MyPhoneStateListener myPhoneStateListener = new MyPhoneStateListener();
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        telephonyManager.listen(myPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        //启动服务，在service中监听电话状态并进行重播提醒
+        Intent callIntent=new Intent(LookActivity.this, MyService.class);
+        callIntent.putExtra("phone",phone);
+        startService(callIntent);
+
     }
 
     //拨打电话
@@ -188,10 +188,10 @@ public class LookActivity extends AppCompatActivity {
             intent.setAction("android.intent.action.CALL");//调用系统拨打电话
             intent.setData(Uri.parse("tel:" + phone2));
             startActivity(intent);
-            //监听电话接通状态
-            MyPhoneStateListener myPhoneStateListener = new MyPhoneStateListener();
-            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            telephonyManager.listen(myPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+            //启动服务，在service中监听电话状态并进行重播提醒
+            Intent callIntent=new Intent(LookActivity.this, MyService.class);
+            callIntent.putExtra("phone",phone2);
+            startService(callIntent);
         }
     }
 
@@ -205,7 +205,7 @@ public class LookActivity extends AppCompatActivity {
 
     public void sendMessage2(View v) {
         if (phone2.equals("")) {
-            System.out.println("phone2:========"+phone2);
+            System.out.println("phone2:========" + phone2);
             Toast.makeText(this, "没有号码", Toast.LENGTH_SHORT).show();
         } else {
             Uri smsToUri = Uri.parse("smsto:" + phone2);
@@ -214,78 +214,4 @@ public class LookActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-    private class MyPhoneStateListener extends PhoneStateListener {
-        private int callCount = 0;
-        Thread thread;
-        SharedPreferences sp = getSharedPreferences("recallTime", MODE_PRIVATE);
-        int sleepTime = sp.getInt("recallTime", 10);
-
-        /**
-         * CALL_STATE_IDLE 无任何状态时
-         * CALL_STATE_OFFHOOK 接起电话时(正在拨通中或接通)
-         * CALL_STATE_RINGING 电话进来时（通话时有来电打入）
-         */
-        @Override
-        public void onCallStateChanged(int state, String phoneNumber) {
-            switch (state) {
-                case TelephonyManager.CALL_STATE_IDLE://无任何状态时
-
-                    final Handler handler = new Handler() {
-                        public void handleMessage(Message msg) {
-                            // 要做的事情
-                            super.handleMessage(msg);
-                            if (callCount >= 1) {//第二次及以后不再弹出提示对话框
-                                callCount++;
-                                thread = null;
-                            } else {//第一次挂断时弹出提示对话框
-                                callCount++;
-                                newDialog();
-                            }
-                        }
-                    };
-
-                    thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            while (true) {
-                                try {
-                                    Thread.sleep(sleepTime * 1000);// 线程暂停多少毫秒
-                                    Message message = new Message();
-                                    message.what = 1;
-                                    handler.sendMessage(message);// 发送消息
-                                } catch (InterruptedException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    });
-                    thread.start();
-                    break;
-                case TelephonyManager.CALL_STATE_OFFHOOK://接起电话时
-                    break;
-                case TelephonyManager.CALL_STATE_RINGING://电话进来时
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void newDialog() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(LookActivity.this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-            builder.setTitle("是否重新拨打");
-            builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.CALL");//调用系统拨打电话
-                    intent.setData(Uri.parse("tel:" + phone));
-                    startActivity(intent);
-                }
-            });
-            builder.setPositiveButton("取消", null);
-            builder.show();
-        }
-    }
-
 }
