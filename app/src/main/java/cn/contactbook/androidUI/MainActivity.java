@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -117,10 +120,47 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     public void add(View v) {
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "该软件需要悬浮窗权限，请授予！", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 10);
+            } else {
+                Intent intent = new Intent(this, AddActivity.class);
+                startActivity(intent);
+            }
+        }else {
+            Intent intent = new Intent(this, AddActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
+    /**
+     * 用户返回
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 10) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!Settings.canDrawOverlays(this)) {
+                    Toast.makeText(this, "权限授予失败，无法开启悬浮窗", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "权限授予成功！", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(this, AddActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+        }
+    }
     @Override
     public boolean onQueryTextSubmit(String query) {
         // 实际应用中应该在该方法内执行实际查询

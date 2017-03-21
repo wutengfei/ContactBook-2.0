@@ -6,13 +6,14 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 短信服务权限 -->
-
     <uses-permission android:name="android.permission.SEND_SMS"/>
+    <!--   读取联系人权限-->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <!--  读写存储权限-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<!--系统对话框-->
+    <!--系统悬浮窗-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <application
             android:allowBackup="true"
