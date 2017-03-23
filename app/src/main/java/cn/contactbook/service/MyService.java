@@ -47,7 +47,7 @@ public class MyService extends Service {
         private int callCount = 0;
         Thread thread;
         SharedPreferences sp = getSharedPreferences("recallTime", MODE_PRIVATE);
-        int sleepTime = sp.getInt("recallTime", 10);
+        int sleepTime = sp.getInt("recallTime", 100000000);
 
         /**
          * CALL_STATE_IDLE 无任何状态时
