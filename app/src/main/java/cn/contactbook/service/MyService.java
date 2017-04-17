@@ -38,11 +38,12 @@ public class MyService extends Service {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         telephonyManager.listen(myPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
-
         return super.onStartCommand(intent, flags, startId);
     }
 
-
+    /**
+     * 监听电话状态类，挂断重拨的逻辑
+     */
     private class MyPhoneStateListener extends PhoneStateListener {
         private int callCount = 0;
         Thread thread;

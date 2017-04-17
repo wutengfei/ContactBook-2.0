@@ -116,6 +116,12 @@ public class LookActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * 跳转到编辑联系人
+     * 把姓名，id等内容传递到编辑联系人界面
+     *
+     * @param v
+     */
     public void edit(View v) {
         Intent intent = new Intent(this, EditActivity.class);
         intent.putExtra("id", id);
@@ -197,6 +203,7 @@ public class LookActivity extends AppCompatActivity {
 
     }
 
+    //发送短信
     public void sendMessage2(View v) {
         if (phone2.equals("")) {
             System.out.println("phone2:========" + phone2);
@@ -216,7 +223,7 @@ public class LookActivity extends AppCompatActivity {
         if (requestCode == 1) {
             // 用户取消授权这个数组为空，如果你同时申请两个权限，那么grantResults的length就为2，分别记录你两个权限的申请结果
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-              //同意授权时。。。。。
+                //同意授权时。。。。。
             } else {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -243,6 +250,7 @@ public class LookActivity extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
     //以下代码可以跳转到应用详情，可以通过应用详情跳转到权限界面(6.0系统测试可用)
     private void getAppDetailSettingIntent(Context context) {
         Intent localIntent = new Intent();

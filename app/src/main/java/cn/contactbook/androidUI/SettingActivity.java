@@ -28,13 +28,12 @@ public class SettingActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         SharedPreferences sp = getSharedPreferences("recallTime", MODE_PRIVATE);
-        int sleepTime = sp.getInt("recallTime", 10);
-        editText.setText(sleepTime + "");
+        int recallTime = sp.getInt("recallTime", 10);//设置重拨时间，默认为10秒
+        editText.setText(recallTime + "");
     }
 
     public void sure(View view) {
         recallTime = Integer.parseInt(editText.getText().toString().trim());
-
         SharedPreferences sp = getSharedPreferences("recallTime", MODE_PRIVATE);
         //拿到sp的编辑器
         SharedPreferences.Editor ed = sp.edit();

@@ -38,8 +38,8 @@ public class DBAdapter {
         private static final String DB_CREATE = "create table " +
                 DB_TABLE + "(" + KEY_ID + " integer primary key autoincrement," +
                 KEY_NAME + " varchar(20)," + KEY_PHONE + " varchar(20)," +
-                KEY_PHONE2 + " varchar(20)," + KEY_EMAIL + " varchar(50),"+
-                KEY_PHOTO+" varchar(100),"+KEY_SEX+" varchar(10),"+KEY_COMPANY+" varchar(100))";
+                KEY_PHONE2 + " varchar(20)," + KEY_EMAIL + " varchar(50)," +
+                KEY_PHOTO + " varchar(100)," + KEY_SEX + " varchar(10)," + KEY_COMPANY + " varchar(100))";
 
         @Override
         public void onCreate(SQLiteDatabase _db) {
@@ -58,6 +58,10 @@ public class DBAdapter {
         context = _context;
     }
 
+    /**
+     * 打开数据库
+     * @throws SQLiteException
+     */
     public void open() throws SQLiteException {
         DBOpenHelper dbOpenHelper = new DBOpenHelper(context, DB_NAME, null, DB_version);
         try {
@@ -74,22 +78,39 @@ public class DBAdapter {
         }
     }
 
+    /**
+     * 插入联系人
+     *
+     * @param contact
+     * @return
+     */
     public long insert(Contact contact) {
         ContentValues newValues = new ContentValues();
-            newValues.put(KEY_NAME, contact.getName());
-            newValues.put(KEY_PHONE, contact.getPhone());
-            newValues.put(KEY_PHONE2, contact.getPhone2());
-            newValues.put(KEY_EMAIL, contact.getEmail());
-            newValues.put(KEY_PHOTO, contact.getPhoto());
-            newValues.put(KEY_SEX, contact.getSex());
-            newValues.put(KEY_COMPANY, contact.getCompany());
-            return db.insert(DB_TABLE, null, newValues);
+        newValues.put(KEY_NAME, contact.getName());
+        newValues.put(KEY_PHONE, contact.getPhone());
+        newValues.put(KEY_PHONE2, contact.getPhone2());
+        newValues.put(KEY_EMAIL, contact.getEmail());
+        newValues.put(KEY_PHOTO, contact.getPhoto());
+        newValues.put(KEY_SEX, contact.getSex());
+        newValues.put(KEY_COMPANY, contact.getCompany());
+        return db.insert(DB_TABLE, null, newValues);
     }
 
+    /**
+     * 删除联系人
+     * @param id
+     * @return
+     */
     public long delete(int id) {
         return db.delete(DB_TABLE, KEY_ID + " like ? ", new String[]{id + ""});
     }
 
+    /**
+     * 更新联系人
+     * @param id
+     * @param contact
+     * @return
+     */
     public long update(int id, Contact contact) {
         ContentValues updateValues = new ContentValues();
         updateValues.put(KEY_NAME, contact.getName());
@@ -102,20 +123,33 @@ public class DBAdapter {
         return db.update(DB_TABLE, updateValues, KEY_ID + " like ? ", new String[]{id + ""});
     }
 
+    /**
+     * 根据ID查询联系人
+     * @param id
+     * @return
+     */
     public Contact[] getContact(int id) {
-        Cursor cursor = db.query(DB_TABLE, new String[]{KEY_ID, KEY_NAME, KEY_PHONE,KEY_PHONE2,KEY_EMAIL,
-                KEY_PHOTO,KEY_SEX,KEY_COMPANY},
+        Cursor cursor = db.query(DB_TABLE, new String[]{KEY_ID, KEY_NAME, KEY_PHONE, KEY_PHONE2, KEY_EMAIL,
+                        KEY_PHOTO, KEY_SEX, KEY_COMPANY},
                 KEY_ID + " like ? ", new String[]{id + ""}, null, null, null, null);
         return ConvertToContact(cursor);
     }
-
+    /**
+     * 查询所有联系人
+     * @return
+     */
     public Contact[] getAll() {
-        Cursor cursor = db.query(DB_TABLE, new String[]{KEY_ID, KEY_NAME, KEY_PHONE,KEY_PHONE2,KEY_EMAIL,
-                KEY_PHOTO,KEY_SEX,KEY_COMPANY},
+        Cursor cursor = db.query(DB_TABLE, new String[]{KEY_ID, KEY_NAME, KEY_PHONE, KEY_PHONE2, KEY_EMAIL,
+                        KEY_PHOTO, KEY_SEX, KEY_COMPANY},
                 null, null, null, null, KEY_NAME + " asc");
         return ConvertToContact(cursor);
     }
 
+    /**
+     * 将游标cursor中的联系人取出，放到联系人数组中
+     * @param cursor
+     * @return 联系人数组
+     */
     private Contact[] ConvertToContact(Cursor cursor) {
         int resultCounts = cursor.getCount();
         if (resultCounts == 0 || !cursor.moveToFirst()) return null;
@@ -134,9 +168,4 @@ public class DBAdapter {
         }
         return peoples;
     }
-
-
-
-
-
 }

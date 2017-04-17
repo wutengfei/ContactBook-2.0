@@ -11,6 +11,10 @@ public class Controller {
     private static DBAdapter dbAdapter;
     Context context;
 
+    /**
+     * 创建构造方法，并打开数据库
+     * @param context
+     */
     public Controller(Context context) {
         this.context = context;
         dbAdapter = new DBAdapter(context);

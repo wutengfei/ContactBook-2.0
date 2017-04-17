@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ListView lv;
     private SearchView sv;
     private static final int item1 = Menu.FIRST;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         //创建SimpleAdapter适配器将数据绑定到item显示控件上
         SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.listview,
                 new String[]{"photo", "name"}, new int[]{R.id.imageView, R.id.name});
-
+        //把头像填充到适配器中
         adapter.setViewBinder(new SimpleAdapter.ViewBinder() {
 
             @Override
@@ -89,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
-
+     /**
+      * 给ListView绑定适配器，并设置点击事件
+      */
         if (lv != null) {
             lv.setAdapter(adapter);
             //listView点击事件
@@ -131,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 Intent intent = new Intent(this, AddActivity.class);
                 startActivity(intent);
             }
-        }else {
+        } else {
             Intent intent = new Intent(this, AddActivity.class);
             startActivity(intent);
         }
@@ -161,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         }
     }
+
     @Override
     public boolean onQueryTextSubmit(String query) {
         // 实际应用中应该在该方法内执行实际查询
@@ -223,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         return true;
     }
+
     //菜单列表
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
