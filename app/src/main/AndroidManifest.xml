@@ -22,8 +22,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".androidUI.MainActivity"
-                android:launchMode="singleTask">
+                android:name=".androidUI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -38,9 +37,12 @@
                 android:name=".androidUI.LookActivity"
                 android:launchMode="singleTask">
         </activity>
-        <activity android:name=".androidUI.EditActivity">
+        <activity android:name=".androidUI.EditActivity"
+                  android:launchMode="singleTask"
+                >
         </activity>
-        <activity android:name=".androidUI.SettingActivity">
+        <activity android:name=".androidUI.SettingActivity"
+                  android:launchMode="singleTask">
         </activity>
 
         <service
