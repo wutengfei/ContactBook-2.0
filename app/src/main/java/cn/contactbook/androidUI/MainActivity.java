@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_main);
 
     }
-
-
     /**
      * 将适配器显示在onStart方法中是为了让每次显示此界面时都刷新列表
      */
