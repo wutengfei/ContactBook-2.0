@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ListView lv;
     private SearchView sv;
     private static final int item1 = Menu.FIRST;
+    Contact[] contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         lv = (ListView) findViewById(R.id.listView);
 
         sv = (SearchView) findViewById(R.id.searchView);
-        lv.setTextFilterEnabled(true);//设置lv可以被过虑
+        //lv.setTextFilterEnabled(true);//设置lv可以被过虑
         // 设置该SearchView默认是否自动缩小为图标
         sv.setIconifiedByDefault(true);
         // 为该SearchView组件设置事件监听器
@@ -54,10 +55,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         // 设置该SearchView内默认显示的提示文本
         //sv.setQueryHint("");
 
-        final List<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
+        ArrayList<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
 
         Controller controller = new Controller(MainActivity.this);
-        Contact[] contacts = controller.getAllContact();
+        contacts = controller.getAllContact();
 
         if (contacts != null)
             for (int i = 0; i < contacts.length; i++) {
@@ -90,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
-     /**
-      * 给ListView绑定适配器，并设置点击事件
-      */
+        /**
+         * 给ListView绑定适配器，并设置点击事件
+         */
         if (lv != null) {
             lv.setAdapter(adapter);
             //listView点击事件
@@ -169,21 +170,54 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextSubmit(String query) {
         // 实际应用中应该在该方法内执行实际查询
         // 此处仅使用Toast显示用户输入的查询内容
-        Toast.makeText(this, "您的选择是:" + query, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "您的选择是:" + query, Toast.LENGTH_SHORT).show();
         return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        ArrayList<HashMap<String, Object>> obj = searchItem(newText);
+        updateLayout(obj);
+        return false;
 
-        if (TextUtils.isEmpty(newText)) {
-            // 清除ListView的过滤
-            lv.clearTextFilter();
-        } else {
-            // 使用用户输入的内容对ListView的列表项进行过滤
-            lv.setFilterText(newText);
+//        if (TextUtils.isEmpty(newText)) {
+//            // 清除ListView的过滤
+//            lv.clearTextFilter();
+//        } else {
+//            // 使用用户输入的内容对ListView的列表项进行过滤
+//            lv.setFilterText(newText);
+//        }
+//        return true;
+    }
+
+    public ArrayList<HashMap<String, Object>> searchItem(String name) {
+        // ArrayList<String> mSearchList = new ArrayList<String>();
+        ArrayList dataList = new ArrayList<HashMap<String, Object>>();
+        for (int i = 0; i < contacts.length; i++) {
+            int index = contacts[i].getName().indexOf(name);
+            // 存在匹配的数据
+            if (index != -1) {
+
+                HashMap<String, Object> item = new HashMap<String, Object>();
+                item.put("id", contacts[i].getId());
+                item.put("name", contacts[i].getName());
+                item.put("phone", contacts[i].getPhone());
+                item.put("phone2", contacts[i].getPhone2());
+                item.put("email", contacts[i].getEmail());
+                item.put("photo", contacts[i].getPhoto());
+                item.put("sex", contacts[i].getSex());
+                item.put("company", contacts[i].getCompany());
+
+                dataList.add(item);
+
+            }
         }
-        return true;
+        return dataList;
+    }
+
+    public void updateLayout(ArrayList<HashMap<String, Object>> obj) {
+        lv.setAdapter(new SimpleAdapter(this, obj, R.layout.listview,
+                new String[]{"photo", "name"}, new int[]{R.id.imageView, R.id.name}));
     }
 
 
