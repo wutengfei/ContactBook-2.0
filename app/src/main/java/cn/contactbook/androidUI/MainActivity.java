@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private SearchView sv;
     private static final int item1 = Menu.FIRST;
     Contact[] contacts;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
