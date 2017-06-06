@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextSubmit(String query) {
         // 实际应用中应该在该方法内执行实际查询
         // 此处仅使用Toast显示用户输入的查询内容
-       // Toast.makeText(this, "您的选择是:" + query, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "您的选择是:" + query, Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -190,11 +190,17 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 //        return true;
     }
 
+    /**
+     * 搜索主要逻辑。数据库中contact的姓名和输入框中输入的文字一致就存放到新ArrayList
+     *
+     * @param name 输入框中输入的文字
+     * @return dataList  搜索结果存放的ArrayList
+     */
     public ArrayList<HashMap<String, Object>> searchItem(String name) {
-        // ArrayList<String> mSearchList = new ArrayList<String>();
         ArrayList dataList = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i < contacts.length; i++) {
-            int index = contacts[i].getName().indexOf(name);
+            int index = contacts[i].getName().indexOf(name);//搜索框内输入的内容在ListView各条目中的位置 ，内容不匹配就返回-1
+            System.out.println("index-" + index);
             // 存在匹配的数据
             if (index != -1) {
 
@@ -215,6 +221,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         return dataList;
     }
 
+    /**
+     * 更新适配器
+     * @param obj
+     */
     public void updateLayout(ArrayList<HashMap<String, Object>> obj) {
         lv.setAdapter(new SimpleAdapter(this, obj, R.layout.listview,
                 new String[]{"photo", "name"}, new int[]{R.id.imageView, R.id.name}));
