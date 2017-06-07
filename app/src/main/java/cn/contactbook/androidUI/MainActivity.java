@@ -27,12 +27,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private SearchView sv;
     private static final int item1 = Menu.FIRST;
     Contact[] contacts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
     }
+
     /**
      * 将适配器显示在onStart方法中是为了让每次显示此界面时都刷新列表
      */
@@ -220,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     /**
      * 更新适配器
+     *
      * @param obj
      */
     public void updateLayout(ArrayList<HashMap<String, Object>> obj) {

@@ -112,8 +112,7 @@ public class LookActivity extends AppCompatActivity {
     }
 
     public void back(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+       finish();
     }
 
     /**

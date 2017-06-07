@@ -72,8 +72,7 @@ public class AddActivity extends AppCompatActivity {
             Contact contact = new Contact(name, phone, phone2, email, photo,sex,company);
             Controller controller = new Controller(AddActivity.this);
             controller.add(contact);
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+           finish();
         }
     }
     /**
