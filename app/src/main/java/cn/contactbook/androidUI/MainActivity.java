@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     System.out.println("--------点击的是-----" + parent.getAdapter().getItem(position).toString());
                     List<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
 
-                    data.add((HashMap<String, Object>) parent.getAdapter().getItem(position));
+                    data.add((HashMap<String, Object>) parent.getAdapter().getItem(position));//把搜索结果放到一个list中（配合搜索使用）
                     Set<String> keySet = data.get(0).keySet();//用Set的keySet方法取出key的集合
                     Iterator<String> it = keySet.iterator();
                     while (it.hasNext()) {
@@ -164,11 +164,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
     }
 
+    /**
+     * 按回车时触发的操作
+     * @param query
+     * @return
+     */
     @Override
     public boolean onQueryTextSubmit(String query) {
         // 实际应用中应该在该方法内执行实际查询
         // 此处仅使用Toast显示用户输入的查询内容
-        // Toast.makeText(this, "您的选择是:" + query, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "您的选择是:" + query, Toast.LENGTH_SHORT).show();
         return true;
     }
 
